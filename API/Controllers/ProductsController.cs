@@ -16,8 +16,8 @@ public class ProductsController(IGenericRepository<Product> productRepository) :
   [HttpGet]
   public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand, string? type, string? sort)
   {
-    var spec = new ProductSpecification(brand, type);
-
+    var spec = new ProductSpecification(brand, type, sort);
+    
     var products = await productRepository.ListAsync(spec);
 
     return Ok(products);
@@ -82,17 +82,19 @@ public class ProductsController(IGenericRepository<Product> productRepository) :
     
   }
 
-  // [HttpGet("brands")]
-  // public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
-  // {
-  //   return Ok();
-  // }
+  [HttpGet("brands")]
+  public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
+  {
+    var spec = new BrandListSpecification();
+    return Ok(await productRepository.ListAsync(spec));
+  }
 
-  // [HttpGet("types")]
-  // public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
-  // {
-  //   return Ok();
-  // }
+  [HttpGet("types")]
+  public async Task<ActionResult<IReadOnlyList<string>>> GetTypes()
+  {
+    var spec = new TypeListSpecification();
+    return Ok(await productRepository.ListAsync(spec));
+  }
   private bool ProductExists(int id)
   {
     return productRepository.Exists(id);
