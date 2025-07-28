@@ -1,4 +1,5 @@
 using System;
+using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -10,17 +11,18 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductsController(IGenericRepository<Product> productRepository) : ControllerBase
+public class ProductsController(IGenericRepository<Product> productRepository) : BaseAPIController
 {
   
   [HttpGet]
-  public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(string? brand, string? type, string? sort)
+  public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts(
+    [FromQuery] ProductSpecParams specParams)
   {
-    var spec = new ProductSpecification(brand, type, sort);
-    
-    var products = await productRepository.ListAsync(spec);
+    var spec = new ProductSpecification(specParams);
+    var createPageResult = await CreatePagedResult(productRepository, spec,
+    specParams.PageIndex, specParams.PageSize); 
 
-    return Ok(products);
+    return Ok(createPageResult);
   }
 
   [HttpGet("{id:int}")]
