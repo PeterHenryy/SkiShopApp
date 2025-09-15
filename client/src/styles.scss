@@ -51,6 +51,43 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   ));
 }
 
-.match-input-height{
-  height: var(--mat-form-field-container-height) !important;
+.match-input-height {
+  height: 56px !important; // Explicit height to match mat-form-field
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 14px;
+}
+
+.mdc-notched-outline__notch{
+  border-right-style: none !important;
+}
+
+::ng-deep .responsive-dialog .mat-dialog-container {
+  width: 600px;            
+  max-width: 90vw;         
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  ::ng-deep .responsive-dialog .mat-dialog-container {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 550px) {
+  ::ng-deep .responsive-dialog .mat-dialog-container {
+    width: 95vw;
+    max-width: none;
+    padding: 12px;
+  }
+
+  ::ng-deep .responsive-dialog * {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
 }

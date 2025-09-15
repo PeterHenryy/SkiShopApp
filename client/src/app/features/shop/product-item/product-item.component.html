@@ -1,16 +1,31 @@
 @if(product){
-
-  <mat-card appearance="raised">
-        <img src="{{product.pictureUrl}}" class="rounded-t-lg" alt="image of {{product.name}}">
-        <mat-card-content class="mt-2">
-          <h2 class="text-sm font-extrabold uppercase">{{product.name}}</h2>
-          <p class="font-medium">{{product.price | currency}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-stroked-button class="w-full">
-            <mat-icon>add_shopping_cart</mat-icon>
-            Add to card
-          </button>
-        </mat-card-actions>
+  <mat-card 
+    appearance="raised" 
+    routerLink="/shop/{{product.id}}" 
+    class="product-card w-full cursor-pointer hover:shadow-lg transition-shadow duration-300"
+  >
+    <img 
+      src="{{product.pictureUrl}}" 
+      class="rounded-t-lg w-full" 
+      alt="image of {{product.name}}" 
+    />
+    <mat-card-content class="mt-2">
+      <h2 
+        class="text-sm font-extrabold uppercase truncate" 
+        title="{{product.name}}"
+      >
+        {{product.name}}
+      </h2>
+      <p class="font-medium">{{product.price | currency}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button 
+        mat-stroked-button 
+        class="w-full flex justify-center items-center gap-2"
+      >
+        <mat-icon>add_shopping_cart</mat-icon>
+        Add to cart
+      </button>
+    </mat-card-actions>
   </mat-card>
 }

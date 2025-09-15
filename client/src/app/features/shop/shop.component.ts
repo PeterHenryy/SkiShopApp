@@ -14,6 +14,14 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { Pagination } from '../../shared/models/pagination';
 import { FormsModule } from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-shop',
@@ -28,7 +36,14 @@ import { MatIconButton } from '@angular/material/button';
     MatMenuTrigger,
     MatPaginator,
     FormsModule,
-    MatIconButton
+    MatIconButton,
+    MatPaginatorModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatToolbarModule
 ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
@@ -67,12 +82,15 @@ export class ShopComponent implements OnInit {
   }
 
   openFiltersDialog(){
-    const dialogRef = this.dialogService.open(FiltersDialogComponent, {
-      minWidth: '500px',
+    const dialogRef = this.dialogService.open(FiltersDialogComponent, {      
       data:{
         selectedBrands: this.shopParams.brands,
         selectedTypes: this.shopParams.types
-      }
+      },
+      panelClass: 'responsive-dialog',
+      width: '600px',
+      maxWidth: '70vw',
+      maxHeight: '70vh'
     });
     dialogRef.afterClosed().subscribe({
       next: result => {
