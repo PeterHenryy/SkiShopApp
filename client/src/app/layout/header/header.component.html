@@ -1,5 +1,5 @@
 <header class="shadow-md p-3 w-full bg-white z-50">
-  <div class="flex flex-col items-center gap-2 lg:flex-row lg:justify-between max-w-screen-2xl mx-auto">
+  <div class="flex flex-col items-center gap-2 lg:flex-row lg:justify-between w-full">
 
 
     <!-- Logo -->
@@ -15,7 +15,7 @@
     </button>
 
     <!-- Desktop Menu -->
-    <div class="hidden lg:flex items-center gap-8">
+    <div class="hidden lg:flex justify-between items-center gap-8">
       <!-- Nav Links -->
       <nav class="flex gap-6 uppercase text-lg font-medium">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -24,6 +24,9 @@
       </nav>
 
       <!-- Cart & Auth Buttons -->
+    </div>
+    <div class="hidden lg:flex justify-between items-center gap-8 mx-10">
+
       <div class="flex gap-4 items-center">
         <a matBadge="5" matBadgeSize="large" class="custom-badge mt-1">
           <mat-icon>shopping_cart</mat-icon>
@@ -32,39 +35,39 @@
         <button mat-stroked-button>Register</button>
       </div>
     </div>
+    <div 
+      class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out mt-2 px-4 text-lg font-medium uppercase"
+      [ngClass]="{
+        'max-h-[500px] opacity-100': isMobileMenuOpen,
+        'max-h-0 opacity-0': !isMobileMenuOpen
+      }"
+    >
+      <nav class="flex flex-col items-center gap-3 text-center">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">Home</a>
+        <a routerLink="/shop" routerLinkActive="active" (click)="closeMobileMenu()">Shop</a>
+        <a href="#" (click)="closeMobileMenu()">Contact</a>
+      </nav>
+  
+      <!-- Cart Icon -->
+      <div class="flex justify-center mt-4">
+        <a 
+          matBadge="5" 
+          matBadgeSize="small" 
+          matBadgeOverlap="false" 
+          class="custom-badge relative"
+        >
+          <mat-icon class="text-3xl">shopping_cart</mat-icon>
+        </a>
+      </div>
+  
+      <!-- Auth Buttons -->
+      <div class="flex justify-center gap-4 mt-4">
+        <button mat-stroked-button>Login</button>
+        <button mat-stroked-button>Register</button>
+      </div>
+    </div>
   </div>
 
   <!-- Mobile Menu: Slide Down -->
-  <div 
-    class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out mt-2 px-4 text-lg font-medium uppercase"
-    [ngClass]="{
-      'max-h-[500px] opacity-100': isMobileMenuOpen,
-      'max-h-0 opacity-0': !isMobileMenuOpen
-    }"
-  >
-    <nav class="flex flex-col items-center gap-3 text-center">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">Home</a>
-      <a routerLink="/shop" routerLinkActive="active" (click)="closeMobileMenu()">Shop</a>
-      <a href="#" (click)="closeMobileMenu()">Contact</a>
-    </nav>
-
-    <!-- Cart Icon -->
-    <div class="flex justify-center mt-4">
-      <a 
-        matBadge="5" 
-        matBadgeSize="small" 
-        matBadgeOverlap="false" 
-        class="custom-badge relative"
-      >
-        <mat-icon class="text-3xl">shopping_cart</mat-icon>
-      </a>
-    </div>
-
-    <!-- Auth Buttons -->
-    <div class="flex justify-center gap-4 mt-4">
-      <button mat-stroked-button>Login</button>
-      <button mat-stroked-button>Register</button>
-    </div>
-  </div>
 
 </header>
